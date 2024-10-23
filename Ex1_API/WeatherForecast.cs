@@ -1,4 +1,4 @@
-namespace Ex1_API
+﻿namespace Ex1_API
 {
     public class WeatherForecast
     {

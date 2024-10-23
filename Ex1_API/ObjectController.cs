@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ApplicationService;
+using ApplicationService.Interfaces;
 
 [ApiController]
 [Route("api/[controller]")]
