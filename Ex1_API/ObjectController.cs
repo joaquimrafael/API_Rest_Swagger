@@ -3,17 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using ApplicationService;
 using ApplicationService.Interfaces;
 
+// defino essa classe como controler da API
 [ApiController]
 [Route("api/[controller]")]
 public class ObjectController : ControllerBase
 {
     private readonly IMyService _myService;
-
+    // injeto a minha classe de serviço no construtor para processar o objeto
     public ObjectController(IMyService myService)
     {
         _myService = myService;
     }
 
+    // faça uma requisição http post para escrever o objeto
     [HttpPost]
     public IActionResult Post([FromBody] MyObject object1)
     {
