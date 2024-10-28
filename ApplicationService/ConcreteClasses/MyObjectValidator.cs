@@ -10,7 +10,9 @@ namespace ApplicationService
             RuleFor(x => x.name)
                 .NotEmpty().WithMessage("O nome é obrigatorio");
 
-            RuleFor(x => x.id).GreaterThan(0).WithMessage("O Id deve ser maior que 0");
+            RuleFor(x => x.id)
+                .Must(id => int.TryParse(id, out _))
+                .WithMessage("Id deve ser um número");
 
             RuleFor(x => x.date)
                 .NotEmpty().WithMessage("O Id é obrigatorio")
