@@ -9,6 +9,6 @@ namespace ApplicationService.Interfaces
 {
     public interface IStatementService
     {
-        Task<List<StatementResponse>> GetStatementAsync(int statementId);
+        Task<List<StatementResponse>> GetStatementAsync();
     }
 }

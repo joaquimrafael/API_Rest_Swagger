@@ -4,7 +4,7 @@ using Infrastructure.Models;
 using System.Threading.Tasks;
 using ApplicationService.Interfaces;
 
-namespace Ex1_API
+namespace Ex1_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,20 +12,20 @@ namespace Ex1_API
     {
         private readonly IStatementService _statementService;
 
-        public StatementController (IStatementService statementService)
+        public StatementController(IStatementService statementService)
         {
             _statementService = statementService;
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetStatement(int id)
+        // chamada do metodo get sem parametros
+        [HttpGet]
+        public async Task<IActionResult> GetStatement()
         {
-            var statements = await _statementService.GetStatementAsync(id);
+            var statements = await _statementService.GetStatementAsync();
 
-            if (statements == null || !statements.Any())
+            /*if (statements == null || !statements.Any())
             {
                 return NotFound();
-            }
+            }*/
 
             return Ok(statements);
         }

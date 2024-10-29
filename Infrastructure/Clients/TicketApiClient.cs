@@ -18,21 +18,25 @@ namespace Infrastructure.Clients
         {
             _httpClient = httpClient;
         }
+        // crio o cliente que vai fazer a requisição get ao servidor
 
-        public async Task<List<StatementResponse>> GetStatementAsync(int statementId)
+        public async Task<List<StatementResponse>> GetStatementAsync()
         {
-            var response = await _httpClient.GetAsync($"/api/v1/StatementRequests/{statementId}");
+            var response = await _httpClient.GetAsync($"/api/v1/StatementRequests");
+            // navego ate o endpoint desejado
             response.EnsureSuccessStatusCode();
 
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync(); // leio o conteudo
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            var statementResponses = JsonSerializer.Deserialize<List<StatementResponse>>(content, options);
+            // faço um serializador Json que n é sensivel a case
 
+            var statementResponses = JsonSerializer.Deserialize<List<StatementResponse>>(content, options);
+            // recebo a resposta e a retorno
             return statementResponses;
         }
 

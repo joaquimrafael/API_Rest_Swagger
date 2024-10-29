@@ -1,7 +1,6 @@
 using ApplicationService;
 using ApplicationService.Interfaces;
 using ApplicationService.ConcreteClasses;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Interfaces;
 using Infrastructure.Clients;
@@ -20,11 +19,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMyService, MyService>(); // adiciono o contexto de objeto para o construtor
 
+// adiciono cliente para o servidor da uri passada
 builder.Services.AddHttpClient<ITicketApiClient, TicketApiClient>(client =>
 {
     client.BaseAddress = new Uri("http://refund-statement-dev-admin.ticket.edenred.net");
 });
-
+// adiciono no escopo do builder as minhas interfaces de regras de negocio
 builder.Services.AddScoped<IStatementService, StatementService>();
 
 var app = builder.Build(); 

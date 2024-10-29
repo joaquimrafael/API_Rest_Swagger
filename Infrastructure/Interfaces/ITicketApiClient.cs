@@ -9,6 +9,6 @@ namespace Infrastructure.Interfaces
 {
     public interface ITicketApiClient
     {
-        Task<List<StatementResponse>> GetStatementAsync(int ticketId);
+        Task<List<StatementResponse>> GetStatementAsync();
     }
 }
