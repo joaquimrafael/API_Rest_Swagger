@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Models;
 using System.Threading.Tasks;
 using ApplicationService.Interfaces;
+using System.Reflection;
 
 namespace Ex1_API.Controllers
 {
-    [Route(template: "api/v1/StatementRequests")]
     [ApiController]
     public class StatementController : ControllerBase
     {
@@ -17,7 +17,8 @@ namespace Ex1_API.Controllers
             _statementService = statementService;
         }
         // chamada do metodo get sem parametros
-        [HttpGet(Name = "GetStatements")]
+        [HttpGet]
+        [Route(template: "api/v1/StatementRequests")]
         public async Task<IActionResult> GetStatement()
         {
             var statements = await _statementService.GetStatementAsync();
@@ -28,6 +29,13 @@ namespace Ex1_API.Controllers
             }*/
 
             return Ok(statements);
+        }
+
+        [HttpPost]
+        [Route(template: "api/v1/StatementRequests")]
+        public StatusCodeResult Post()
+        {
+            return Ok();
         }
     }
 }
