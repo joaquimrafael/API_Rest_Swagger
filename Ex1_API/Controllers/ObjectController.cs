@@ -5,7 +5,7 @@ using ApplicationService.Interfaces;
 
 // defino essa classe como controler da API
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class ObjectController : ControllerBase
 {
     private readonly IMyService _myService;
@@ -16,7 +16,7 @@ public class ObjectController : ControllerBase
     }
 
     // faça uma requisição http post para escrever o objeto
-    [HttpPost]
+    [HttpPost(Name ="PostObject")]
     public IActionResult Post([FromBody] MyObject object1)
     {
         _myService.ProcessObject(object1);

@@ -6,7 +6,7 @@ using ApplicationService.Interfaces;
 
 namespace Ex1_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(template: "api/v1/StatementRequests")]
     [ApiController]
     public class StatementController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace Ex1_API.Controllers
             _statementService = statementService;
         }
         // chamada do metodo get sem parametros
-        [HttpGet]
+        [HttpGet(Name = "GetStatements")]
         public async Task<IActionResult> GetStatement()
         {
             var statements = await _statementService.GetStatementAsync();

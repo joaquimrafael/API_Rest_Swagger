@@ -23,6 +23,11 @@ namespace ApplicationService
                 .NotEmpty().WithMessage("O email é obrigatorio")
                 .EmailAddress().WithMessage("Email deve ser válido");
 
+            RuleFor(x => x.programmer)
+                .Must(programmer => bool.TryParse(programmer, out _))
+                .WithMessage("Programador deve ser booleano (true/false)");
+
+
         }
     }
 }
