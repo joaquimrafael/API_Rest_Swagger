@@ -19,6 +19,11 @@ namespace ApplicationService.ConcreteClasses
         {
             return await _ticketApiClient.GetStatementsAsync();
         }
+
+        public async Task<StatementCreationResponse> CreateStatementAsync(StatementRequest request)
+        {
+            return await _ticketApiClient.CreateStatementAsync(request);
+        }
     }
 }
 

@@ -10,5 +10,6 @@ namespace ApplicationService.Interfaces
     public interface IStatementService
     {
         Task<List<StatementResponse>> GetStatementsAsync();
+        Task<StatementCreationResponse> CreateStatementAsync(StatementRequest statement);
     }
 }

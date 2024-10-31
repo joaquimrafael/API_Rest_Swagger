@@ -4,6 +4,7 @@ using Infrastructure.Models;
 using System.Threading.Tasks;
 using ApplicationService.Interfaces;
 using System.Reflection;
+using Refit;
 
 namespace Ex1_API.Controllers
 {
@@ -19,7 +20,7 @@ namespace Ex1_API.Controllers
         }
         // chamada do metodo get sem parametros
         [HttpGet]
-        public async Task<IActionResult> GetStatement()
+        public async Task<IActionResult> GetStatements()
         {
             var statements = await _statementService.GetStatementsAsync();
 
@@ -32,14 +33,15 @@ namespace Ex1_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> CreateStatement([FromBody] StatementRequest request)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
-                
-            return Ok();
+
+            var createdStatment = await _statementService.CreateStatementAsync(request);
+            return CreatedAtAction(nameof(GetStatements), new { id = createdStatment.Id }, createdStatment);
         }
     }
 }

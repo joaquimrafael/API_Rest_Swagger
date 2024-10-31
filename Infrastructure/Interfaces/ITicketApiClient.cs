@@ -10,6 +10,10 @@ namespace Infrastructure.Interfaces
 {
     public interface ITicketApiClient
     {
+        [Get(("/api/v1/StatementRequests"))]
         Task<List<StatementResponse>> GetStatementsAsync();
+
+        [Post("/api/v1/StatementRequests")]
+        Task<StatementCreationResponse> CreateStatementAsync([Body] StatementRequest request);
     }
 }
