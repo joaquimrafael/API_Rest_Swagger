@@ -20,7 +20,7 @@ namespace Infrastructure.Clients
         }
         // crio o cliente que vai fazer a requisição get ao servidor
 
-        public async Task<List<StatementResponse>> GetStatementAsync()
+        public async Task<List<StatementResponse>> GetStatementsAsync()
         {
             var response = await _httpClient.GetAsync($"/api/v1/StatementRequests");
             // navego ate o endpoint desejado

@@ -15,9 +15,9 @@ namespace ApplicationService.ConcreteClasses
         }
         // injeção de dependencia da classe cliente da infra por construtor
 
-        public async Task<List<StatementResponse>> GetStatementAsync()
+        public async Task<List<StatementResponse>> GetStatementsAsync()
         {
-            return await _ticketApiClient.GetStatementAsync();
+            return await _ticketApiClient.GetStatementsAsync();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Reflection;
 namespace Ex1_API.Controllers
 {
     [ApiController]
+    [Route(template: "api/v1/StatementRequests")]
     public class StatementController : ControllerBase
     {
         private readonly IStatementService _statementService;
@@ -18,10 +19,9 @@ namespace Ex1_API.Controllers
         }
         // chamada do metodo get sem parametros
         [HttpGet]
-        [Route(template: "api/v1/StatementRequests")]
         public async Task<IActionResult> GetStatement()
         {
-            var statements = await _statementService.GetStatementAsync();
+            var statements = await _statementService.GetStatementsAsync();
 
             /*if (statements == null || !statements.Any())
             {
@@ -32,9 +32,13 @@ namespace Ex1_API.Controllers
         }
 
         [HttpPost]
-        [Route(template: "api/v1/StatementRequests")]
-        public StatusCodeResult Post()
+        public async Task<IActionResult> Post()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+                
             return Ok();
         }
     }
