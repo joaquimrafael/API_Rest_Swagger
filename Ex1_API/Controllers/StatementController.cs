@@ -33,6 +33,8 @@ namespace Ex1_API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(StatementCreationResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateStatement([FromBody] StatementRequest request)
         {
             if (!ModelState.IsValid)
