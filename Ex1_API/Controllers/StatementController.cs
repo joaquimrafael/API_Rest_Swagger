@@ -24,10 +24,10 @@ namespace Ex1_API.Controllers
         {
             var statements = await _statementService.GetStatementsAsync();
 
-            /*if (statements == null || !statements.Any())
+            if (statements == null || !statements.Any())
             {
                 return NotFound();
-            }*/
+            }
 
             return Ok(statements);
         }
@@ -44,6 +44,25 @@ namespace Ex1_API.Controllers
 
             var createdStatment = await _statementService.CreateStatementAsync(request);
             return CreatedAtAction(nameof(GetStatements), new { id = createdStatment.Id }, createdStatment);
+        }
+
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetStatementsPagination
+            ([FromQuery] StatementRequestPaginationParameters parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return (BadRequest());
+            }
+
+            var paginatedStatements = await _statementService.GetStatementsPaginationAsync(parameters);
+
+            if (paginatedStatements == null || paginatedStatements.Items == null || !paginatedStatements.Items.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(paginatedStatements);
         }
     }
 }

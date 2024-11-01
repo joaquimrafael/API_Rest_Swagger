@@ -11,5 +11,6 @@ namespace ApplicationService.Interfaces
     {
         Task<List<StatementResponse>> GetStatementsAsync();
         Task<StatementCreationResponse> CreateStatementAsync(StatementRequest statement);
+        Task<StatementPaginationResponse> GetStatementsPaginationAsync(StatementRequestPaginationParameters parameters);
     }
 }

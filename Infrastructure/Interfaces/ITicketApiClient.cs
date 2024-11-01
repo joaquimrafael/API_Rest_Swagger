@@ -15,5 +15,9 @@ namespace Infrastructure.Interfaces
 
         [Post("/api/v1/StatementRequests")]
         Task<StatementCreationResponse> CreateStatementAsync([Body] StatementRequest request);
+
+        [Get("/api/v1/StatementRequests/pagination")]
+        Task<StatementPaginationResponse> GetStatementsPaginationAsync(
+            [Query] StatementRequestPaginationParameters parameters);
     }
 }

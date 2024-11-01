@@ -24,6 +24,12 @@ namespace ApplicationService.ConcreteClasses
         {
             return await _ticketApiClient.CreateStatementAsync(request);
         }
+
+        public async Task<StatementPaginationResponse> GetStatementsPaginationAsync
+            (StatementRequestPaginationParameters parameters)
+        {
+            return await _ticketApiClient.GetStatementsPaginationAsync(parameters);
+        }
     }
 }
 
