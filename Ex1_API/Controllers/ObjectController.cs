@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ApplicationService;
+﻿using ApplicationService;
 using ApplicationService.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 // defino essa classe como controler da API
 [ApiController]
@@ -16,7 +15,7 @@ public class ObjectController : ControllerBase
     }
 
     // faça uma requisição http post para escrever o objeto
-    [HttpPost(Name ="PostObject")]
+    [HttpPost(Name = "PostObject")]
     public IActionResult Post([FromBody] MyObject object1)
     {
         _myService.ProcessObject(object1);
@@ -58,5 +57,29 @@ public class ObjectController : ControllerBase
         }
     }
 
-}
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetObject(int id)
+    {
+        try
+        {
+            var obj = await _myService.GetAsync(id);
+            return Ok(obj);
 
+        }
+        catch (FileNotFoundException)
+        {
+
+            return NotFound();
+        }
+    }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MyObject>))]
+    public async Task<IActionResult> GetAllObjects()
+    {
+        var objects = await _myService.GetAllObjectsAsync();
+        return Ok(objects);
+    }
+}

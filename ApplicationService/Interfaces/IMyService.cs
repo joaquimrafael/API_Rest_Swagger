@@ -15,5 +15,9 @@ namespace ApplicationService.Interfaces
         Task DeleteAsync(int id);
 
         Task PutAsync(int id,MyObject obj);
+
+        Task<MyObject> GetAsync(int id);
+
+        Task<List<MyObject>> GetAllObjectsAsync();
     }
 }

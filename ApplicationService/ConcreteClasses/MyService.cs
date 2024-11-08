@@ -66,5 +66,46 @@ namespace ApplicationService
             }
         }
 
+        public async Task<MyObject> GetAsync(int id)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Arquivos");
+            string fileName = Path.Combine(path, $"object_{id}.json");
+
+            if (File.Exists(fileName))
+            {
+                string jsonContent = await File.ReadAllTextAsync(fileName);
+                MyObject obj = JsonSerializer.Deserialize<MyObject>(jsonContent);
+                return obj;
+
+            }
+            else
+            {
+                throw new FileNotFoundException($"Arquivo com o id{id} não foi encontrado");
+            }
+
+
+        }
+
+        public async Task<List<MyObject>> GetAllObjectsAsync()
+        {
+            var _directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "Arquivos");
+            var objects = new List<MyObject>();
+
+            if (Directory.Exists(_directoryPath))
+            {
+                var files = Directory.GetFiles(_directoryPath, "object_*.json");
+
+                foreach (var file in files)
+                {
+                    string jsonContent = await File.ReadAllTextAsync(file);
+                    MyObject obj = JsonSerializer.Deserialize<MyObject>(jsonContent);
+                    objects.Add(obj);
+                }
+            }
+
+            return objects;
+        }
     }
+
 }
+
