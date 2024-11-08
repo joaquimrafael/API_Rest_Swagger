@@ -11,5 +11,7 @@ namespace ApplicationService.Interfaces
     {
         // metodo obrigatorio para processar o objeto
         void ProcessObject(MyObject obj);
+
+        Task DeleteAsync(int id);
     }
 }

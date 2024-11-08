@@ -32,5 +32,23 @@ namespace ApplicationService
             File.WriteAllText(fileName, jsonString);
 
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Arquivos");
+            string fileName = Path.Combine(path, $"object_{id}.json");
+
+            if(File.Exists(fileName))
+            {
+                await Task.Run(() => File.Delete(fileName));
+            }
+            else
+            {
+                throw new FileNotFoundException($"Arquivo com o id{id} não foi encontrado");
+            }
+
+
+        }
+
     }
 }

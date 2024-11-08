@@ -22,5 +22,24 @@ public class ObjectController : ControllerBase
         _myService.ProcessObject(object1);
         return Ok();
     }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteObject(int id)
+    {
+        try
+        {
+            await _myService.DeleteAsync(id);
+            return NoContent();
+
+        }
+        catch (FileNotFoundException)
+        {
+
+            return NotFound();
+        }
+    }
+
 }
 
