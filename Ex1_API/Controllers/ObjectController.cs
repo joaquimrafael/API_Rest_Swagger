@@ -41,5 +41,22 @@ public class ObjectController : ControllerBase
         }
     }
 
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> UpdateObject(int id, [FromBody] MyObject obj)
+    {
+        try
+        {
+            await _myService.PutAsync(id, obj);
+            return Ok();
+        }
+        catch (FileNotFoundException)
+        {
+            return NotFound();
+        }
+    }
+
 }
 

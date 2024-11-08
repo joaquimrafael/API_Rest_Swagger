@@ -50,5 +50,21 @@ namespace ApplicationService
 
         }
 
+        public async Task PutAsync(int id, MyObject obj)
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Arquivos");
+            string fileName = Path.Combine(path, $"object_{id}.json");
+
+            if (File.Exists(fileName))
+            {
+                string jsonString = JsonSerializer.Serialize(obj);
+                File.WriteAllText(fileName, jsonString);
+            }
+            else
+            {
+                throw new FileNotFoundException($"Arquivo com o id{id} não foi encontrado");
+            }
+        }
+
     }
 }

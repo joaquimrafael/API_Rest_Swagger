@@ -13,5 +13,7 @@ namespace ApplicationService.Interfaces
         void ProcessObject(MyObject obj);
 
         Task DeleteAsync(int id);
+
+        Task PutAsync(int id,MyObject obj);
     }
 }
